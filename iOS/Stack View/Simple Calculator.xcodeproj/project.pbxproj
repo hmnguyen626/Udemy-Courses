@@ -12,16 +12,18 @@
 		A0B1EBF120BE238000F1BC75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0B1EBEF20BE238000F1BC75 /* Main.storyboard */; };
 		A0B1EBF320BE238100F1BC75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0B1EBF220BE238100F1BC75 /* Assets.xcassets */; };
 		A0B1EBF620BE238100F1BC75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0B1EBF420BE238100F1BC75 /* LaunchScreen.storyboard */; };
+		A0B1EBFE20BEA2BC00F1BC75 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B1EBFD20BEA2BC00F1BC75 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A0B1EBE820BE238000F1BC75 /* Stack View.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stack View.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0B1EBE820BE238000F1BC75 /* Simple Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Simple Calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0B1EBEB20BE238000F1BC75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0B1EBED20BE238000F1BC75 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A0B1EBF020BE238000F1BC75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A0B1EBF220BE238100F1BC75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0B1EBF520BE238100F1BC75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A0B1EBF720BE238100F1BC75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0B1EBFD20BEA2BC00F1BC75 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +40,7 @@
 		A0B1EBDF20BE237F00F1BC75 = {
 			isa = PBXGroup;
 			children = (
+				A0B1EBFD20BEA2BC00F1BC75 /* Default-568h@2x.png */,
 				A0B1EBEA20BE238000F1BC75 /* Stack View */,
 				A0B1EBE920BE238000F1BC75 /* Products */,
 			);
@@ -46,7 +49,7 @@
 		A0B1EBE920BE238000F1BC75 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A0B1EBE820BE238000F1BC75 /* Stack View.app */,
+				A0B1EBE820BE238000F1BC75 /* Simple Calculator.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,9 +70,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A0B1EBE720BE238000F1BC75 /* Stack View */ = {
+		A0B1EBE720BE238000F1BC75 /* Simple Calculator */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A0B1EBFA20BE238100F1BC75 /* Build configuration list for PBXNativeTarget "Stack View" */;
+			buildConfigurationList = A0B1EBFA20BE238100F1BC75 /* Build configuration list for PBXNativeTarget "Simple Calculator" */;
 			buildPhases = (
 				A0B1EBE420BE238000F1BC75 /* Sources */,
 				A0B1EBE520BE238000F1BC75 /* Frameworks */,
@@ -79,9 +82,9 @@
 			);
 			dependencies = (
 			);
-			name = "Stack View";
+			name = "Simple Calculator";
 			productName = "Stack View";
-			productReference = A0B1EBE820BE238000F1BC75 /* Stack View.app */;
+			productReference = A0B1EBE820BE238000F1BC75 /* Simple Calculator.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -99,7 +102,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A0B1EBE320BE238000F1BC75 /* Build configuration list for PBXProject "Stack View" */;
+			buildConfigurationList = A0B1EBE320BE238000F1BC75 /* Build configuration list for PBXProject "Simple Calculator" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -112,7 +115,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A0B1EBE720BE238000F1BC75 /* Stack View */,
+				A0B1EBE720BE238000F1BC75 /* Simple Calculator */,
 			);
 		};
 /* End PBXProject section */
@@ -123,6 +126,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0B1EBF620BE238100F1BC75 /* LaunchScreen.storyboard in Resources */,
+				A0B1EBFE20BEA2BC00F1BC75 /* Default-568h@2x.png in Resources */,
 				A0B1EBF320BE238100F1BC75 /* Assets.xcassets in Resources */,
 				A0B1EBF120BE238000F1BC75 /* Main.storyboard in Resources */,
 			);
@@ -315,7 +319,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A0B1EBE320BE238000F1BC75 /* Build configuration list for PBXProject "Stack View" */ = {
+		A0B1EBE320BE238000F1BC75 /* Build configuration list for PBXProject "Simple Calculator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A0B1EBF820BE238100F1BC75 /* Debug */,
@@ -324,7 +328,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A0B1EBFA20BE238100F1BC75 /* Build configuration list for PBXNativeTarget "Stack View" */ = {
+		A0B1EBFA20BE238100F1BC75 /* Build configuration list for PBXNativeTarget "Simple Calculator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A0B1EBFB20BE238100F1BC75 /* Debug */,
