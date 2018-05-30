@@ -37,6 +37,7 @@ class ViewController: UIViewController {
         valueLabel.text?.insert(value, at: (valueLabel.text?.endIndex)!)
     }
     
+    // Provide an alert to the user if an error occurs. (Typically when an optional is unwrapped and nil)
     func makeAlert(){
         // Alert
         let alert = UIAlertController(title: "Error", message: "Something has gone terribly wrong.", preferredStyle: .alert)
@@ -49,7 +50,8 @@ class ViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    // CalculateValues Closure
+    // If x and y is not nil, then return a String, else return a nil.
+    // In this case if it is returned as nil, then our logic will present an error @163
     var calculateValues: (String?, String?, Character?) -> String? = { x, y, logic in
         switch logic {
         case "+":
@@ -85,8 +87,7 @@ class ViewController: UIViewController {
             // Source: https://stackoverflow.com/questions/40495301/what-does-is-unavailable-use-truncatingremainder-instead-mean
             return String(Float(x)!.truncatingRemainder(dividingBy: Float(y)!))
         default:
-            print("Something wrong happen with calculateValues switch logic.")
-            return "Broken default listed"
+            print("Invalid case.")
         }
     }
     
@@ -101,9 +102,11 @@ class ViewController: UIViewController {
     
     @IBAction func buttonPressed(_ sender: UIButton) {
         switch sender.tag {
+            // If tag value is from range 0-9, then it will be passed as a Character
         case 0...9:
             updateUI(value: Character("\(sender.tag)"))
         case 10:
+            // Initial conditions
             resetCalculator()
         case 11:
             // Sets negative value
@@ -167,7 +170,7 @@ class ViewController: UIViewController {
                 makeAlert()
             }
         default:
-            print("Invalid")
+            print("Invalid tag.")
         }
     }
     
