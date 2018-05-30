@@ -87,7 +87,7 @@ class ViewController: UIViewController {
             // Source: https://stackoverflow.com/questions/40495301/what-does-is-unavailable-use-truncatingremainder-instead-mean
             return String(Float(x)!.truncatingRemainder(dividingBy: Float(y)!))
         default:
-            print("Invalid case.")
+            return nil
         }
     }
     
