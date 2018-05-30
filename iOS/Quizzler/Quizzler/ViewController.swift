@@ -49,6 +49,8 @@ class ViewController: UIViewController {
         progressLabel.text = String(progressIndex) + " /13"
         scoreLabel.text = String(score)
         
+        // Make our progress bar the size of our screen division by 13
+        progressBar.frame.size.width = (view.frame.size.width / 13) * CGFloat(progressIndex)
         
     }
     
@@ -83,6 +85,7 @@ class ViewController: UIViewController {
         // If selected is correct answer, then update score value
         if(selected == questions.list[questionCounter].answer){
             score += 1
+            
         }
     }
     
@@ -94,5 +97,6 @@ class ViewController: UIViewController {
         questionLabel.text = questions.list[questionCounter].questionText
         scoreLabel.text = String(score)
         progressLabel.text = String(progressIndex) + " /13"
+        progressBar.frame.size.width = (view.frame.size.width / 13)
     }
 }
