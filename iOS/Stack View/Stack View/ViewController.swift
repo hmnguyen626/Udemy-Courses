@@ -50,8 +50,8 @@ class ViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    // If x and y is not nil, then return a String, else return a nil.
-    // In this case if it is returned as nil, then our logic will present an error @163
+    // If x and y is not nil then return a String, else return a nil.
+    // In this case if it is returned as nil, then our logic will present an error @156
     var calculateValues: (String?, String?, Character?) -> String? = { x, y, logic in
         switch logic {
         case "+":
@@ -98,6 +98,18 @@ class ViewController: UIViewController {
         value1 = nil
         value2 = nil
         updateUI(value: input)
+        negative = false
+    }
+    
+    // Update conditions depending on user interaction.
+    // Note:  I temporarily store valueLabel.text into value1 for future calculations.
+    func updateConditions(selectedOperator: Character){
+        value1 = valueLabel.text
+        calculatorOperator = selectedOperator
+        negative = false
+        
+        // This resets our label
+        updateUI(value: nil)
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
@@ -118,35 +130,15 @@ class ViewController: UIViewController {
                 negative = true
             }
         case 12:
-            // Store first value for later use and set operator
-            value1 = valueLabel.text
-            calculatorOperator = "%"
-            
-            updateUI(value: nil)
+            updateConditions(selectedOperator: "%")
         case 13:
-            // Store first value for later use and set operator
-            value1 = valueLabel.text
-            calculatorOperator = "/"
-            
-            updateUI(value: nil)
+            updateConditions(selectedOperator: "/")
         case 14:
-            // Store first value for later use and set operator
-            value1 = valueLabel.text
-            calculatorOperator = "X"
-            
-            updateUI(value: nil)
+            updateConditions(selectedOperator: "X")
         case 15:
-            // Store first value for later use and set operator
-            value1 = valueLabel.text
-            calculatorOperator = "-"
-            
-            updateUI(value: nil)
+            updateConditions(selectedOperator: "-")
         case 16:
-            // Store first value for later use and set operator
-            value1 = valueLabel.text
-            calculatorOperator = "+"
-            
-            updateUI(value: nil)
+            updateConditions(selectedOperator: "+")
         case 17:
             // If our string contains a "." already, then break.
             if (valueLabel.text?.contains("."))!{
