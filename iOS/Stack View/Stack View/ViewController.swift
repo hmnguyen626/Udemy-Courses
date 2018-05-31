@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     // Provide an alert to the user if an error occurs. (Typically when an optional is unwrapped and nil)
     func makeAlert(){
         // Alert
-        let alert = UIAlertController(title: "Error", message: "Something has gone terribly wrong.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Error", message: "Missing input.", preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "Reset", style: .default) { (UIAlertAction) in
             self.resetCalculator()
         }
@@ -58,7 +58,7 @@ class ViewController: UIViewController {
             guard let x = x, let y = y else {
                 return nil
             }
-
+            
             return String(Float(x)! + Float(y)!)
         case "-":
             guard let x = x, let y = y else {
