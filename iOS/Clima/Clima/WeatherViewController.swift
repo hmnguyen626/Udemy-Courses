@@ -17,8 +17,9 @@ import Alamofire
 //JSON pod
 import SwiftyJSON
 
-//When we add a delegate, it says we are conforming to the protocols set by it
-class WeatherViewController: UIViewController, CLLocationManagerDelegate {
+//When we add a delegate, it says we are conforming to the protocols set by it.
+//For example ChangeCityDelegate requires that we have the function userEnteredANewCityName
+class WeatherViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDelegate {
     
     //Constants
     let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
@@ -27,16 +28,16 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
 
     //TODO: Declare instance variables here
-    let locationManager = CLLocationManager()
-    
-    //new weatherdatamodel object
-    let weatherDataModel = WeatherDataModel()
+    let locationManager = CLLocationManager()   //CLLocationManager object that handles our GPF functionalities
+    let weatherDataModel = WeatherDataModel()   //new weatherdatamodel object
+    var citySentBackFromUser : String?
     
     //Pre-linked IBOutlets
     @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
-
+    @IBOutlet weak var tempSwitch: UISwitch!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,7 +115,13 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             let conditionResult = json["weather"][0]["id"].int
             
             //Update our weatherDataModel properties
-            weatherDataModel.temperature = Int((tempResult * 9/5) - 459.67)
+            if tempSwitch.isOn {
+                weatherDataModel.temperature = Int((tempResult * 9/5) - 459.67)
+            } else {
+                weatherDataModel.temperature = Int(tempResult - 273)
+
+            }
+            
             weatherDataModel.city = cityResult!
             weatherDataModel.condition = conditionResult!
             weatherDataModel.weatherIconName = weatherDataModel.updateWeatherIcon(condition: weatherDataModel.condition)
@@ -162,9 +169,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.stopUpdatingLocation()
             
             //prevents it from printing multiple (error in time delay)
-            //locationManager.delegate = nil
-            
-            print("longitude = \(location.coordinate.longitude), latitude = \(location.coordinate.latitude)")
+            locationManager.delegate = nil
             
             let latitude = String(location.coordinate.latitude)
             let longitude = String(location.coordinate.longitude)
@@ -193,13 +198,24 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     
     //Write the userEnteredANewCityName Delegate method here:
-    
+    func userEnteredANewCityName(city: String) {
+        let params : [String : String] = ["q" : city, "appid" : APP_ID]
+        
+        getWeatherData(url: WEATHER_URL, parameters: params)
+    }
 
     
     //Write the PrepareForSegue Method here
-    
-    
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "changeCityName" {
+            let destinationVC = segue.destination as! ChangeCityViewController
+            
+            // Sets the delegate variable we created in ChangeCityViewController as
+            // self, ie, this current viewController
+            destinationVC.delegate = self
+        }
+    }
+
     
     
 }
