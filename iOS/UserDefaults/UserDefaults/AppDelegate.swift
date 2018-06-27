@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  Todoey
+//  UserDefaults
 //
-//  Created by Hieu Nguyen on 6/7/18.
+//  Created by Hieu Nguyen on 6/11/18.
 //  Copyright © 2018 HMdev. All rights reserved.
 //
 
@@ -13,9 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    // Runs when the application first launch
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+        // Override point for customization after application launch.
         return true
     }
 
