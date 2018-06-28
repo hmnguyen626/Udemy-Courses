@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Category View Controller-->
+        <!--Todoey-->
         <scene sceneID="laV-Rv-C2w">
             <objects>
                 <tableViewController id="fDG-bK-dYH" customClass="CategoryViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ZJL-Ok-pOw">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" id="ZJL-Ok-pOw">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZJL-Ok-pOw" id="15j-l9-Tgg">
@@ -32,7 +32,14 @@
                             <outlet property="delegate" destination="fDG-bK-dYH" id="XvP-bw-dah"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="gSi-yR-8M5"/>
+                    <navigationItem key="navigationItem" title="Todoey" id="gSi-yR-8M5">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Dxf-Mc-D9c">
+                            <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="addButtonPressed:" destination="fDG-bK-dYH" id="KYP-MW-1JC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="VmE-2D-8ho" kind="show" identifier="goToItems" id="MLT-Ja-cw2"/>
                     </connections>
@@ -41,7 +48,7 @@
             </objects>
             <point key="canvasLocation" x="1110" y="169"/>
         </scene>
-        <!--Todoey-->
+        <!--Items-->
         <scene sceneID="cU8-bs-eEN">
             <objects>
                 <tableViewController id="VmE-2D-8ho" customClass="ToDoListViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
@@ -72,7 +79,7 @@
                             <outlet property="delegate" destination="VmE-2D-8ho" id="cOe-lt-okc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Todoey" id="bPf-Sz-JWX">
+                    <navigationItem key="navigationItem" title="Items" id="bPf-Sz-JWX">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="9W3-Jt-But">
                             <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>

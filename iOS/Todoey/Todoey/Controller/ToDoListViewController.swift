@@ -11,10 +11,14 @@ import CoreData
 
 class ToDoListViewController: UITableViewController {
 
-    // Outlets
-    
     // Local variables
     var itemArray : [Item] = []
+    var selectedCategory : Category? {
+        // Calls didSet immediately after the variable gets set with a value!
+        didSet {
+            loadItems()
+        }
+    }
     
     // Core data
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -22,8 +26,6 @@ class ToDoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        loadItems()
     }
 
     
@@ -86,6 +88,7 @@ class ToDoListViewController: UITableViewController {
             let newItem = Item(context: self.context)
             newItem.title = textField.text!
             newItem.done = false
+            newItem.parentCategory = self.selectedCategory
             
             self.itemArray.append(newItem)
             
@@ -122,7 +125,18 @@ class ToDoListViewController: UITableViewController {
     }
 
     // Either use passed parameter, or a default value of = Item.fetchRequest()
-    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
+    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
+        
+        // Query our database for the category with NSPredicate
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        
+        if let additionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
+        } else {
+            request.predicate = categoryPredicate
+        }
+        
+        request.predicate = categoryPredicate
         
         do {
             itemArray = try context.fetch(request)
