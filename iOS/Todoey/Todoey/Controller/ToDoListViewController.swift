@@ -7,30 +7,23 @@
 //
 
 import UIKit
+import CoreData
 
 class ToDoListViewController: UITableViewController {
 
+    // Outlets
+    
     // Local variables
     var itemArray : [Item] = []
     
-    // Defaults (store user data)
-    let defaults = UserDefaults.standard
-    
+    // Core data
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let newItem = Item(title: "Find Mike")
-        itemArray.append(newItem)
         
-        let newItem2 = Item(title: "Destroy Demogorgon")
-        itemArray.append(newItem2)
-        
-        // Gets stored data from defaults and cast it as an array of String
-        if let items = defaults.array(forKey: "ToDoListArray") as? [Item] {
-            itemArray = items
-        }
-
+        loadItems()
     }
 
     
@@ -64,6 +57,8 @@ class ToDoListViewController: UITableViewController {
         // Set our Item to done = true if not true, else set false
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         
+        saveItems()
+        
         // Change the behavior of selecting a cell
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -86,18 +81,16 @@ class ToDoListViewController: UITableViewController {
         
         // Step 2 - Make an action
         let alertAction = UIAlertAction(title: "Add Item", style: .default) {
-            // Closure
             (action) in
             
-            // Because we are in a closure, we must use .self, to assign this ViewController as to where itemArray exists
-            let newItem = Item(title: textField.text!)
+            let newItem = Item(context: self.context)
+            newItem.title = textField.text!
+            newItem.done = false
+            
             self.itemArray.append(newItem)
             
-            // Save updated itemArray to our userdefaults
-            // self.defaults.set(self.itemArray, forKey: "ToDoListArray")
-            
-            let encoder = PropertyListEncoder()
-            
+            // NSCoder
+            self.saveItems()
             
             // Reload the tableView
             self.tableView.reloadData()
@@ -107,10 +100,8 @@ class ToDoListViewController: UITableViewController {
         // Add a textfield to our alert
         alert.addTextField { (alertTextField) in
             
-            // Just a placeholder
             alertTextField.placeholder =  "Create new Item"
-            
-            // Because this is within a closure, we need to use a local variable to grab the information written by the user and assign it to our local variable
+
             textField = alertTextField
         }
         
@@ -121,30 +112,79 @@ class ToDoListViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    
+    func saveItems() {
+        do {
+            try context.save()
+        } catch {
+            print("Error saving context, \(error)")
+        }
+        
+    }
 
-    
-    
-    
-
-    
-
-
-    
-    
-    //------------------------------------------------------------------------------
-    //MARK -
-    
-    
-    
-    
-    
-    //------------------------------------------------------------------------------
-    //MARK -
-    
-    
-    
+    // Either use passed parameter, or a default value of = Item.fetchRequest()
+    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
+        
+        do {
+            itemArray = try context.fetch(request)
+        } catch {
+            print("Error fetching data from context: \(error)")
+        }
+        
+        tableView.reloadData()
+    }
     
     
 }
+
+//------------------------------------------------------------------------------
+//MARK - UISearchBarDelegate Methods
+
+extension ToDoListViewController: UISearchBarDelegate {
+
+    // When user clicks "search"
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        // In any read, we need this!
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        
+        // Use NSPredicate to query
+        request.predicate = NSPredicate(format: "title CONTAINS %@", searchBar.text!)
+        
+        // We can sort aswell!
+        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        
+        // Do the search
+        loadItems(with: request)
+        
+    }
+    
+    // Reload our original list, for below logic
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            loadItems()
+            
+            // DispatchQueue on the main thread
+            DispatchQueue.main.async {
+                
+                // Dismiss searchBar and keyboard
+                searchBar.resignFirstResponder()
+                
+            }
+            
+        }
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
